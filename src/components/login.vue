@@ -26,7 +26,24 @@ export default {
   methods: {
     handlelogin () {
       this.$http.post(`login`, this.formdata).then((res) => {
-        console.log(res)
+        // console.log(res)
+        const {
+          data: {
+            data,
+            meta: {msg,status}
+          }
+        } = res
+        if (status === 200) {
+          // console.log('success---------')
+          // 渲染hone.vue 
+          this.$router.push({
+            name:'home'
+          })
+        }else{
+          // console.log('66666666666666666')
+          // 提示框
+          this.$message.error(msg);
+        }
       })
     }
   }
